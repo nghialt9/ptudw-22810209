@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const expressHandlebars = require('express-handlebars');
+const {createStarList} = require('./controllers/handlebarsHelper');
 
 //cấu hình public static folder
 app.use(express.static(__dirname + '/public'));
@@ -16,14 +17,18 @@ app.engine('hbs', expressHandlebars.engine({
     defaultLayout: 'layout',
     runtimeOptions: {
         allowProtoPropertiesByDefault: true
+    },
+    helpers: {
+        createStarList
     }
 }));
 app.set('view engine', 'hbs');
 
 //route
 app.use('/', require('./routes/indexRouter'))
+app.use('/products', require('./routes/productsRouter'));
 
-app.use((error, req, res, next) => {
+app.use((req, res, next) => {
 	res.status(404).render('error', {message: 'File not Found!'});
 });
 
