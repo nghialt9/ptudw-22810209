@@ -38,11 +38,13 @@ controller.showHomepage = async (req, res) => {
     }
 }
 
-controller.showPage = (req, res) => {
-    const pages = ['cart', 'checkout', 'contact', 'login', 'my-account', 'products', 'product-detail', 'product-list', 'wishlist'];
+controller.showPage = (req, res, next) => {
+    const pages = ['cart', 'checkout', 'contact', 'login', 'my-account', 'product-detail', 'product-list', 'wishlist'];
     if (pages.includes(req.params.page)) {
         res.render(req.params.page);
-    }6
+    }
+
+    next();
 }
 
 module.exports = controller;

@@ -20,9 +20,9 @@
                 <div class="row align-items-center product-detail-top">
                     <div class="col-md-5">
                         <div class="product-slider-single">
-                            <img src="img/product-1.png" alt="Product Image">
-                            <img src="img/product-2.png" alt="Product Image">
-                            <img src="img/product-3.png" alt="Product Image">
+                            {{#each Images}}
+                            <img src="{{imagePath}}" alt="{{name}}">
+                            {{/each}}
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -65,7 +65,7 @@
                                 <a class="nav-link" data-toggle="pill" href="#specification">Specification</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
+                                <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (Reviews.length)</a>
                             </li>
                         </ul>
 
@@ -81,8 +81,9 @@
                                 <p>{{specification}}</p>>
                             </div>
                             <div id="reviews" class="container tab-pane fade"><br>
+                                {{#each Reviews}}
                                 <div class="reviews-submitted">
-                                    <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
+                                    <div class="reviewer">{{User.firstName}} {{User.lastName}} - <span>{{createdAt}}</span></div>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -91,10 +92,10 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <p>
-                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam.
+                                        {{review}}
                                     </p>
                                 </div>
+                                {{/each}}
                                 <div class="reviews-submit">
                                     <h4>Give your Review:</h4>
                                     <div class="ratting">

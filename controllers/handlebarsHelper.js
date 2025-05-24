@@ -14,10 +14,12 @@ helper.createStarList= (stars) => {
 		str += '<i class="fa fa-star-half"></i>';
 		i++;
 	}
-	for (i=0; i<5; i++){
+	for (; i<5; i++){
 		str += '<i class="fa fa-star-o"></i>';
 	}
 	str += '</div>';
+
+	return str;
 }
 
 module.exports = helper;
