@@ -39,7 +39,7 @@ controller.placeorders = async (req, res) => {
     ${address.state}, ${address.zipCode}`;
     cart.paymentMethod = req.body.payment;
 
-    switch(req.bodypayment){
+    switch(req.body.payment){
         case 'PAYPAL':
             saveOrders(req, res, 'PAID');
             break;
