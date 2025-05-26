@@ -1,1 +1,1 @@
-# ptudw-project-resource
+# ptudw-project-resource nodemon --legacy-watch index.js

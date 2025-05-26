@@ -45,4 +45,10 @@ controller.remove = (req, res) => {
         total: req.session.cart.total
     });
 }
+
+controller.clear = (req, res) => {
+    req.session.cart.clear();
+    return res.sendStatus(200).end();
+}
+
 module.exports = controller;

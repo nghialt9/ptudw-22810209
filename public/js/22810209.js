@@ -48,9 +48,36 @@ async function removeCart(id) {
         if(res.status==200){
             let json = await res.json();
             document.getElementById('cart-quantity').innerText = `(${json.quantity})`;
-            document.getElementById('subtotal').innerText = `($${json.subtotal})`;
-            document.getElementById('total').innerText = `($${json.total})`;
-            document.getElementById(`product${id}`).remove();
+            if(json.quantity > 0) {
+                document.getElementById('subtotal').innerText = `($${json.subtotal})`;
+                document.getElementById('total').innerText = `($${json.total})`;
+                document.getElementById(`product${id}`).remove();
+            } else {
+                document.querySelector('.cart-page .container').innerHTML = 
+                `<div class="text-center border py-3">
+                    <h3>Your cart is empty!</h3>
+                </div>`
+            }            
+        }
+    }
+}
+
+async function clearCart() {
+    if(confirm('Do you really want to clear all cart?')) {
+        let res = await fetch('/products/cart/all', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        if(res.status==200){
+            document.getElementById('cart-quantity').innerText = `(0)`;
+            
+            document.querySelector('.cart-page .container').innerHTML = 
+            `<div class="text-center border py-3">
+                <h3>Your cart is empty!</h3>
+            </div>`      
         }
     }
 }
