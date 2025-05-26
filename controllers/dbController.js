@@ -10,7 +10,7 @@ controller.createDatabase = async () => {
   console.log("Tables created!");
 
   // Check data exist
-  const data = await models.Product.findAll();
+  const data = await models.Address.findAll();
   if (data.length) {
     console.log("Data exist!");
     return;

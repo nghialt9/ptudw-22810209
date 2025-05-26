@@ -12,6 +12,7 @@
 
 
 <!-- Checkout Start -->
+<form action="/users/placeorders" method="post">
 <div class="checkout">
     <div class="container">
         <div class="row">
@@ -24,7 +25,7 @@
                             <div class="payment-method">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" 
-                                    id="address-{{id}}" name="addressId" value="PAYPAL">
+                                    id="address-{{id}}" name="addressId" value="{{id}}" {{#if isDefault}} checked {{/if}}>
                                     <label class="custom-control-label" for="address-{{id}}">
                                         <strong>{{firstName}} {{lastName}}</strong>
                                     </label>
@@ -40,40 +41,10 @@
                             </div>
                         </div>
                         {{/each}}
+                        
                         <div class="col-md-12">
-                            <label>Address</label>
-                            <input class="form-control" type="text" placeholder="Address">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="City">
-                        </div>
-                        <div class="col-md-6">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="State">
-                        </div>
-                        <div class="col-md-6">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="ZIP Code">
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="shipto" name="addressId" value="0">
                                 <label class="custom-control-label" for="shipto">Ship to different address</label>
                             </div>
                         </div>
@@ -181,4 +152,5 @@
         </div>
     </div>
 </div>
+</form>
 <!-- Checkout End -->
