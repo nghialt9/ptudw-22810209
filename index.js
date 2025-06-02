@@ -41,19 +41,53 @@ const pgPool = new Pool({
     host: 'localhost',
     password: 'Pptm@#080791',
     database: 'eshopDB',
-    */
+    /*/
     //PROD
     user: 'admin',
     host: 'dpg-d0p03fodl3ps73acfpbg-a',
     password: 'xtXuoKuBSM2CodlHcNKQBDSJeHhe9d6q',
     database: 'eshopdb_oxmj',
+    //*/
     port: 5432,
 });
+
+// Tự động tạo bảng Session nếu chưa tồn tại
+async function createSessionTable() {
+    try {
+        await pgPool.query(`
+            CREATE TABLE IF NOT EXISTS "Session" (
+                "sid" varchar NOT NULL COLLATE "default",
+                "sess" json NOT NULL,
+                "expire" timestamp(6) NOT NULL,
+                CONSTRAINT "Session_pkey" PRIMARY KEY ("sid")
+            );
+        `);
+        
+        // Kiểm tra và tạo index nếu chưa tồn tại
+        await pgPool.query(`
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1 FROM pg_indexes WHERE indexname = 'IDX_Session_expire'
+                ) THEN
+                    CREATE INDEX "IDX_Session_expire" ON "Session" ("expire");
+                END IF;
+            END $$;
+        `);
+        
+        console.log('Session table created or already exists');
+    } catch (error) {
+        console.error('Error creating Session table:', error);
+    }
+}
+
+// Gọi hàm tạo bảng Session
+createSessionTable();
 
 app.use(session({
     store: new pgSession({
         pool: pgPool,                // kết nối đã tạo
-        tableName: 'session'         // tên bảng sẽ tạo nếu chưa có
+        tableName: 'Session'         // tên bảng sẽ tạo nếu chưa có
     }),
     secret: 'S3cret',
     resave: false,
