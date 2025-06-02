@@ -7,6 +7,8 @@ const expressHandlebars = require('express-handlebars');
 const {createStarList} = require('./controllers/handlebarsHelper');
 const {createPagination} = require('express-handlebars-paginate');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const { Pool } = require('pg');
 
 //cấu hình public static folder
 app.use(express.static(__dirname + '/public'));
@@ -31,8 +33,28 @@ app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-//use session
+// Tạo kết nối đến PostgreSQL
+const pgPool = new Pool({
+    /*
+    //DEV
+    user: 'postgres',
+    host: 'localhost',
+    password: 'Pptm@#080791',
+    database: 'eshopDB',
+    */
+    //PROD
+    user: 'admin',
+    host: 'dpg-d0p03fodl3ps73acfpbg-a',
+    password: 'xtXuoKuBSM2CodlHcNKQBDSJeHhe9d6q',
+    database: 'eshopdb_oxmj',
+    port: 5432,
+});
+
 app.use(session({
+    store: new pgSession({
+        pool: pgPool,                // kết nối đã tạo
+        tableName: 'session'         // tên bảng sẽ tạo nếu chưa có
+    }),
     secret: 'S3cret',
     resave: false,
     saveUninitialized: false,
