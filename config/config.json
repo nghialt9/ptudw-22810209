@@ -8,10 +8,10 @@
   },
   "test": {
     "username": "admin",
-    "password": "xtXuoKuBSM2CodlHcNKQBDSJeHhe9d6q",
-    "database": "eshopdb_oxmj",
-    "host": "dpg-d0p03fodl3ps73acfpbg-a",
-    "dialect": "postgres"
+    "password": "XVe3JgM0gT8vRaMXfX4bzXtff8w0JiFa",
+    "database": "eshopdb_fdip",
+    "host": "dpg-d1d423fdiees73cfgfpg-a",
+    "dialect": "postgres",
   },
   "production": {
     "username": "admin",
