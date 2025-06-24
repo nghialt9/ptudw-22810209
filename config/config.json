@@ -11,7 +11,7 @@
     "password": "XVe3JgM0gT8vRaMXfX4bzXtff8w0JiFa",
     "database": "eshopdb_fdip",
     "host": "dpg-d1d423fdiees73cfgfpg-a",
-    "dialect": "postgres",
+    "dialect": "postgres"
   },
   "production": {
     "username": "admin",
